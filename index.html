@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truss Solver</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- mathjs script that actually works -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.js"></script>
+
+    <script defer src="app.js"></script>
+  </head>
+
+  <body>
+    <!-- header bar goes here! -->
+    <header>
+      <h1>Truss Solver</h1>
+      <span id="mouse-location">Mouse: n/a</span>
+    </header>
+
+    <!-- entire toolbar  goes here, has the feature (node, mem, force, support) add options, the zoom/pan/view, and solve/example/clear -->
+    <section class="toolbar">
+      <div class="group" id="mode-buttons">
+        <!-- new discovery, button's data-modes. data-mode is like a class but you can use it for intended functions of a button  -->
+        <button data-mode="node" class="active" title="Click grid to add node">
+          Node
+        </button>
+        <button data-mode="member" title="Click nodes to connect them">
+          Member
+        </button>
+        <button data-mode="force" title="Click node to apply force">
+          Force
+        </button>
+        <button data-mode="pin" title="Click node to add/remove pinned support">
+          Support: Pin
+        </button>
+        <button
+          data-mode="rollH"
+          title="Pushes vertically, allows horizontal motion"
+        >
+          Support: Horiz. roller
+        </button>
+        <button
+          data-mode="rollV"
+          title="Pushes horizontally, allows vertical motion"
+        >
+          Support: Vert. roller
+        </button>
+        <button
+          data-mode="move"
+          title="Drag nodes to move or drag empty space to pan"
+        >
+          Move/Pan
+        </button>
+      </div>
+
+      <div class="group">
+        <button id="fit">Fit</button>
+      </div>
+
+      <div class="group">
+        <button id="solve" class="primary">Solve</button>
+        <button id="example">Load example</button>
+        <button id="demo">Load demo</button>
+        <button id="clear">Clear</button>
+      </div>
+    </section>
+    <!-- end of toolbar -->
+
+    <section class="toolbar" id="EAsection">
+      <div class="group">
+        <label
+          >E (global, every member)
+          <input id="E" type="number" step="any" value="200000" /> Pa
+          (Pascals);</label
+        >
+        <label
+          >A (global, every member)
+          <input id="A" type="number" step="any" value="1" /> meters
+          squared;</label
+        >
+        <span class="hint inline"
+          >This calculator assumes all members are made entirely out of the same
+          material and have the same constant cross-sectional area.</span
+        >
+      </div>
+    </section>
+
+    <!-- validation message goes here, see if determinate or indeterminate, good to go or not -->
+    <div id="check" class="status"></div>
+    <div id="message" class="status" role="status"></div>
+
+    <!-- this is the canvas where the truss diagram goes -->
+    <canvas id="canvas"></canvas>
+    <p class="hint">
+      Tension members denoted in blue color, compression denoted in red,
+      reaction forces denoted in green.
+    </p>
+
+    <!-- tables for displaying node, member, support data. NOT solution tables or matrix -->
+    <section class="tables">
+      <div class="panel">
+        <!-- just the headings for columns, tbody is the actualm data to be inputted -->
+        <h2>Nodes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>x [m]</th>
+              <th>y [m]</th>
+              <th></th>
+            </tr>
+          </thead>
+          <!-- to be dynamically built and filled with data from js functions -->
+          <tbody id="nodes-table"></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>Members</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nodes</th>
+              <th>Length [m]</th>
+              <th>Force [N]</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="members-table"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>External forces</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th>Fx [N]</th>
+              <th>Fy [N]</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="loads-table"></tbody>
+        </table>
+        <h2>Supports</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th>Type</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="supports-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="steps" class="steps" hidden></section>
+  </body>
+</html>

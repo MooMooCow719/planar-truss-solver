@@ -1,0 +1,201 @@
+/* colors root vars */
+
+:root {
+  --tension: blue;
+  --compression: red;
+  --good: green;
+  --bad: crimson;
+}
+
+body {
+  font-family: Tahoma, Georgia, "Times New Roman", Times, serif;
+  background: #f4f6f8;
+  color: #222;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+header h1 {
+  margin: 0;
+}
+#mouse-location {
+  color: #555;
+  font-size: 14px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+button {
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  background: #fff;
+  cursor: pointer;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 460px;
+  background: #fff;
+  border: 1px solid #999;
+}
+
+.status {
+  min-height: 1.4em;
+  margin: 6px 0;
+}
+
+.tables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+.panel {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+.panel h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.steps {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+.steps p {
+  max-width: 900px;
+  line-height: 1.5;
+}
+.cap {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.eq {
+  font-size: 24px;
+  align-self: center;
+}
+
+/* style all tables */
+table {
+  border-collapse: collapse;
+  background: #fff;
+}
+th,
+td {
+  border: 1px solid #999;
+  padding: 2px 6px;
+}
+
+th {
+  background: #eceff3;
+}
+
+input[type="number"] {
+  width: 70px;
+}
+
+button.active {
+  font-weight: bold;
+  outline: 2px solid #333;
+}
+
+/* colors for dialogs */
+#check.ok {
+  color: var(--good);
+}
+#check.bad {
+  color: var(--bad);
+}
+#message.error {
+  color: var(--bad);
+}
+#message.success {
+  color: var(--good);
+}
+
+td.tension {
+  color: var(--tension);
+  font-weight: bold;
+}
+td.compression {
+  color: var(--compression);
+  font-weight: bold;
+}
+td.reaction,
+.reaction {
+  color: var(--good);
+}
+td.xval {
+  color: var(--good);
+  font-weight: bold;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.sys {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mem-detail-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+table.mat th,
+table.mat td {
+  min-width: 40px;
+  text-align: center;
+}
+
+td.zero,
+td.z {
+  color: #bbb;
+}
+
+details.mem-detail {
+  margin: 6px 0;
+}
+details.mem-detail summary {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
